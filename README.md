@@ -1,17 +1,41 @@
-# flutter_application_1
+# Lista de Tareas en Flutter
 
-A new Flutter project.
+## Descripción del proyecto
 
-## Getting Started
+Aplicación móvil desarrollada con Flutter y Dart que permite trabajar con una lista de tareas. El proyecto forma parte de una práctica de aprendizaje de desarrollo móvil y del uso de Git y GitHub para el control de versiones.
 
-This project is a starting point for a Flutter application.
+## Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- Interfaz de usuario construida con widgets de Flutter.
+- Obtención de información mediante una API pública.
+- Almacenamiento local de información.
+- Ejecución y pruebas en un emulador de Android.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Tecnologías utilizadas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- Visual Studio Code
+- Android Studio y emulador de Android
+- Git y GitHub
+
+## Requisitos
+
+- Flutter SDK instalado.
+- Android Studio con el SDK de Android configurado.
+- Visual Studio Code.
+- Git instalado.
+
+## Reglas de trabajo con Git y GitHub
+
+1. No realizar commits directamente en `main`.
+2. Registrar cada tarea mediante una issue.
+3. Crear una rama por tarea utilizando prefijos como `feature/`, `fix/` o `docs/`.
+4. Realizar commits pequeños y con mensajes descriptivos.
+5. Abrir un Pull Request por cada tarea y relacionarlo con su issue.
+6. Esperar la revisión y las verificaciones automáticas antes de fusionar un Pull Request.
+7. No subir contraseñas, tokens ni claves privadas al repositorio.
+
+## Objetivo de la práctica integradora
+
+Desarrollar y mejorar una aplicación Flutter utilizando un flujo de trabajo organizado con Git y GitHub, incluyendo ramas, commits, issues, Pull Requests y pruebas automatizadas.
