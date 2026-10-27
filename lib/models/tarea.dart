@@ -19,6 +19,6 @@ class Tarea {
   factory Tarea.fromStorage(Map<String, dynamic> json) => Tarea(
     json['titulo'],
     json['descripcion'],
-    completada: json['completada'],
+    completada: json ['completada'],
   );
 }

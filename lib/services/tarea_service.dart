@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/tarea.dart';
 
 class TareaService {
-  static const _url = 'https://jsonplaceholder.typicode.com/todos?_limit=20';
+  static const _url = 'https://jsonplaceholder.typicode.com/todos?_limit=20'; // conectar api
 
   Future<List<Tarea>> obtenerTareas() async {
     final respuesta = await http.get(Uri.parse(_url));
