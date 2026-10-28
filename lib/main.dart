@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/lista_screen.dart';
-//prueba
+//otro comentario
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
