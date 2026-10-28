@@ -98,6 +98,18 @@ class _ListaScreenState extends State<ListaScreen> {
               ),
             );
           }
+          if (tareas.isEmpty) {
+            return const Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.task_alt, size: 64, color: Colors.grey),
+                  SizedBox(height: 12),
+                  Text('No tienes tareas. Toca + para agregar una.'),
+                ],
+              ),
+            );
+          }
           return ListView.builder(
             padding: const EdgeInsets.all(12),
             itemCount: tareas.length,
