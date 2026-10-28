@@ -12,6 +12,10 @@ class MyApp extends StatelessWidget {
       title: 'Mis tareas',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 136, 171, 253)),
+        appBarTheme: const AppBarTheme(centerTitle: true),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          shape: StadiumBorder(),
+        ),      
       ),
       home: const ListaScreen(),
     );
