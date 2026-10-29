@@ -125,7 +125,7 @@ class _ListaScreenState extends State<ListaScreen> {
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 onDismissed: (_) {
-                  setState(() => tareas.removeAt(0));
+                  setState(() => tareas.removeAt(i));
                   _guardar();
                 },
                 child: TareaCard(
