@@ -127,6 +127,9 @@ class _ListaScreenState extends State<ListaScreen> {
                 onDismissed: (_) {
                   setState(() => tareas.removeAt(i));
                   _guardar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Tarea eliminada: ${t.titulo}')),
+                  );
                 },
                 child: TareaCard(
                   tarea: t,
