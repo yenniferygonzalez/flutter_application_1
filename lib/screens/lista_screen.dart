@@ -28,7 +28,7 @@ class _ListaScreenState extends State<ListaScreen> {
 
   Future<void> _cargar() async {
     final guardadas = await _almacen.leer();
-    if (guardadas != null) {
+    if (guardadas != null && guardadas.isNotEmpty) {
       tareas
         ..clear()
         ..addAll(guardadas);
@@ -87,8 +87,11 @@ class _ListaScreenState extends State<ListaScreen> {
             return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('No se pudieron cargar las tareas'),
+                children: [                  
+                  Text(
+                    'No se pudieron cargar las tareas.\n${snapshot.error}',
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: _reintentar,
@@ -99,13 +102,18 @@ class _ListaScreenState extends State<ListaScreen> {
             );
           }
           if (tareas.isEmpty) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.task_alt, size: 64, color: Colors.grey),
-                  SizedBox(height: 12),
-                  Text('No tienes tareas. Toca + para agregar una.'),
+                  const Icon(Icons.task_alt, size: 64, color: Colors.grey),
+                  const SizedBox(height: 12),
+                  const Text('No tienes tareas. Toca + para agregar una.'),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: _reintentar,
+                    child: const Text('Cargar tareas desde la API'),
+                  ),
                 ],
               ),
             );
