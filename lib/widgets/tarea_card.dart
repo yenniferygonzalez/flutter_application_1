@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/tarea.dart';
+import '../domain/models/tarea.dart';
 
 class TareaCard extends StatelessWidget {
   final Tarea tarea;

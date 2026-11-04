@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_application_1/models/tarea.dart';
+import 'package:flutter_application_1/domain/models/tarea.dart';
 
 void main() {
   test('Una tarea nueva empieza como pendiente', () {
