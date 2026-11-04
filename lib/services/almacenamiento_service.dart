@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';//guaradar datos en el dispositivo
-import '../models/tarea.dart';
+import '../domain/models/tarea.dart';
 
 class AlmacenamientoService {
   static const _clave = 'tareas';

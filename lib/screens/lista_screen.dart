@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/tarea.dart';
-import '../services/almacenamiento_service.dart';
-import '../services/tarea_service.dart';
+import 'package:flutter_application_1/data/repositories_implementation/tareas_repository_impl.dart';
+import '../domain/models/tarea.dart';
+import '../domain/repositories/tareas_repository.dart';
 import '../widgets/tarea_card.dart';
 import 'detalle_screen.dart';
 import 'nueva_tarea_screen.dart';
-//prueba pull
+
 class ListaScreen extends StatefulWidget {
   const ListaScreen({super.key});
 
@@ -16,9 +16,9 @@ class ListaScreen extends StatefulWidget {
 class _ListaScreenState extends State<ListaScreen> {
   final List<Tarea> tareas = [];
   late Future<void> _carga;
-  final _almacen = AlmacenamientoService();
+  final TareasRepository _repositorio = TareasRepositoryImpl();
 
-  void _guardar() => _almacen.guardar(tareas);
+  void _guardar() => _repositorio.guardarTareas(tareas);
 
   @override
   void initState() {
@@ -27,18 +27,11 @@ class _ListaScreenState extends State<ListaScreen> {
   }
 
   Future<void> _cargar() async {
-    final guardadas = await _almacen.leer();
-    if (guardadas != null && guardadas.isNotEmpty) {
-      tareas
-        ..clear()
-        ..addAll(guardadas);
-      return;
-    }
-    final datos = await TareaService().obtenerTareas();
+    final datos = await _repositorio.obtenerTareas();
     tareas
       ..clear()
       ..addAll(datos);
-    await _almacen.guardar(tareas);
+    return;
   }
 
   void _reintentar() {
