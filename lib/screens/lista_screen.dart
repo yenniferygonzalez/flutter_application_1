@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/tarea.dart';
-import '../services/almacenamiento_service.dart';
-import '../services/tarea_service.dart';
+import 'package:flutter_application_1/data/repositories_implementation/tareas_repository_impl.dart';
+import '../domain/models/tarea.dart';
+import '../domain/repositories/tareas_repository.dart';
 import '../widgets/tarea_card.dart';
 import 'detalle_screen.dart';
 import 'nueva_tarea_screen.dart';
-//prueba pull
+
 class ListaScreen extends StatefulWidget {
   const ListaScreen({super.key});
 
@@ -16,9 +16,9 @@ class ListaScreen extends StatefulWidget {
 class _ListaScreenState extends State<ListaScreen> {
   final List<Tarea> tareas = [];
   late Future<void> _carga;
-  final _almacen = AlmacenamientoService();
+  final TareasRepository _repositorio = TareasRepositoryImpl();
 
-  void _guardar() => _almacen.guardar(tareas);
+  void _guardar() => _repositorio.guardarTareas(tareas);
 
   @override
   void initState() {
@@ -27,18 +27,11 @@ class _ListaScreenState extends State<ListaScreen> {
   }
 
   Future<void> _cargar() async {
-    final guardadas = await _almacen.leer();
-    if (guardadas != null) {
-      tareas
-        ..clear()
-        ..addAll(guardadas);
-      return;
-    }
-    final datos = await TareaService().obtenerTareas();
+    final datos = await _repositorio.obtenerTareas();
     tareas
       ..clear()
       ..addAll(datos);
-    await _almacen.guardar(tareas);
+    return;
   }
 
   void _reintentar() {
@@ -87,8 +80,11 @@ class _ListaScreenState extends State<ListaScreen> {
             return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('No se pudieron cargar las tareas'),
+                children: [                  
+                  Text(
+                    'No se pudieron cargar las tareas.\n${snapshot.error}',
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: _reintentar,
@@ -99,13 +95,18 @@ class _ListaScreenState extends State<ListaScreen> {
             );
           }
           if (tareas.isEmpty) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.task_alt, size: 64, color: Colors.grey),
-                  SizedBox(height: 12),
-                  Text('No tienes tareas. Toca + para agregar una.'),
+                  const Icon(Icons.task_alt, size: 64, color: Colors.grey),
+                  const SizedBox(height: 12),
+                  const Text('No tienes tareas. Toca + para agregar una.'),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: _reintentar,
+                    child: const Text('Cargar tareas desde la API'),
+                  ),
                 ],
               ),
             );
@@ -127,6 +128,9 @@ class _ListaScreenState extends State<ListaScreen> {
                 onDismissed: (_) {
                   setState(() => tareas.removeAt(i));
                   _guardar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Tarea eliminada: ${t.titulo}')),
+                  );
                 },
                 child: TareaCard(
                   tarea: t,
